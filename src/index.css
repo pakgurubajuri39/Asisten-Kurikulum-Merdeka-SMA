@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Custom styles for printing and preview */
+.print-only {
+  display: none !important;
+}
+
+@media print {
+  body, html, #root {
+    background: white !important;
+    color: black !important;
+    font-family: 'Plus Jakarta Sans', Arial, sans-serif !important;
+    font-size: 11pt !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Reset outer wrapper styling on print */
+  div.relative.min-h-screen {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: none !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-page-break {
+    page-break-before: always !important;
+    break-before: page !important;
+    margin-top: 2cm !important;
+  }
+  .print-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  @page {
+    size: A4;
+    margin: 2cm 1.5cm 2cm 1.5cm;
+  }
+}
+

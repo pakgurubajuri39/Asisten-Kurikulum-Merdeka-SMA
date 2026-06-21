@@ -1,0 +1,6 @@
+{
+  "name": "Asisten Kurikulum Merdeka SMA",
+  "description": "Asisten pintar penyusunan Capaian Pembelajaran (CP) dan Alur Desain Pembelajaran (Modul Ajar) tingkat SMA bersandarkan Keputusan BSKAP No. 046/H/KR/2025",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
