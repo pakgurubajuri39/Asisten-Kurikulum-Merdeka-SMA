@@ -40,10 +40,10 @@ export default function App() {
   const [selectedFase, setSelectedFase] = useState<Fase>(Fase.FASE_F);
   const [selectedKelas, setSelectedKelas] = useState<string>("XI");
   const [guruNama, setGuruNama] = useState<string>("Luky, S.Pt");
-  const [nipGuru, setNipGuru] = useState<string>("19850412 201001 1 002");
-  const [namaSekolah, setNamaSekolah] = useState<string>("SMA Negeri 1 Jakarta");
-  const [namaKepsek, setNamaKepsek] = useState<string>("Dr. H. Ahmad Yani, M.Pd");
-  const [nipKepsek, setNipKepsek] = useState<string>("19720815 199803 1 001");
+  const [nipGuru, setNipGuru] = useState<string>("");
+  const [namaSekolah, setNamaSekolah] = useState<string>("SMA GENESIS MEDICARE");
+  const [namaKepsek, setNamaKepsek] = useState<string>("Dra. Hj. Brimayanti");
+  const [nipKepsek, setNipKepsek] = useState<string>("");
   const [alokasiWaktu, setAlokasiWaktu] = useState<string>("Pertemuan 1 (2 x 45 menit)");
   const [jumlahPertemuan, setJumlahPertemuan] = useState<string>("3 Pertemuan (6 JP)");
   const [topik, setTopik] = useState<string>("Sistem Gerak");
