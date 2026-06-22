@@ -41,8 +41,10 @@ const defaultDPLMapping: Record<string, string[]> = {
   "sejarah": ["Penalaran Kritis", "Kewargaan", "Komunikasi", "Keimanan"],
 };
 
+const apiRouter = express.Router();
+
 // Fetch CP (Phase 1)
-app.post("/api/cp/fetch", async (req, res) => {
+apiRouter.post("/cp/fetch", async (req, res) => {
   try {
     const { mapel, fase } = req.body;
     if (!mapel || !fase) {
@@ -123,7 +125,7 @@ Pastikan teks bernuansa resmi, baku, dan sesuai peraturan BSKAP 046/H/KR/2025. K
 });
 
 // Generate Lesson Design (Phase 2)
-app.post("/api/lesson-plan/generate", async (req, res) => {
+apiRouter.post("/lesson-plan/generate", async (req, res) => {
   try {
     const params = req.body;
     if (!params.mapel || !params.kelas || !params.topik) {
@@ -322,6 +324,9 @@ Pastikan semua nilai teks bernuansa sangat lengkap, analitis, profesional, mengi
     });
   }
 });
+
+app.use("/api", apiRouter);
+app.use(apiRouter); // Fallback if Vercel strips the "/api" prefix
 
 // Serve frontend assets in development and production
 async function startServer() {
