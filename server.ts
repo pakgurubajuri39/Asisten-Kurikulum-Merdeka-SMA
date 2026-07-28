@@ -373,6 +373,11 @@ app.get("/api", (req, res) => res.json({ status: "ok", message: "Pak GuruAI Back
 
 // Serve frontend assets in development and production
 async function startServer() {
+  // Prevent executing Vite or static file serving inside serverless functions
+  if (process.env.VERCEL || process.env.VERCEL_ENV || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.FUNCTION_TARGET) {
+    return;
+  }
+
   if (process.env.NODE_ENV !== "production") {
     const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
@@ -389,13 +394,23 @@ async function startServer() {
   }
 
   // Only run app.listen if not inside Vercel Serverless environment
-  if (!process.env.VERCEL) {
+  if (!process.env.VERCEL && !process.env.VERCEL_ENV && !process.env.AWS_LAMBDA_FUNCTION_NAME) {
     app.listen(PORT, "0.0.0.0", () => {
       console.log(`[OK] Server running on http://0.0.0.0:${PORT}`);
     });
   }
 }
 
-startServer();
+// Only execute startServer if we are NOT in a serverless function environment
+const isServerless = Boolean(
+  process.env.VERCEL ||
+  process.env.VERCEL_ENV ||
+  process.env.AWS_LAMBDA_FUNCTION_NAME ||
+  process.env.FUNCTION_TARGET
+);
+
+if (!isServerless) {
+  startServer();
+}
 
 export default app;
