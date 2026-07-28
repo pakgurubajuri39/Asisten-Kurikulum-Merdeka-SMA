@@ -217,6 +217,36 @@ export default function App() {
       } else if (mapelName === "Sejarah") {
         setTopik(selectedFase === Fase.FASE_E ? "Konsep Ilmu Sejarah" : "Kolonialisme Barat");
         setSelectedKelas(selectedFase === Fase.FASE_E ? "X" : "XI");
+      } else if (mapelName === "Bahasa Indonesia") {
+        setTopik(selectedFase === Fase.FASE_E ? "Teks Laporan Hasil Observasi" : "Esai Kritis & Karya Ilmiah");
+        setSelectedKelas(selectedFase === Fase.FASE_E ? "X" : "XI");
+      } else if (mapelName === "Bahasa Inggris") {
+        setTopik(selectedFase === Fase.FASE_E ? "Narrative & Descriptive Text" : "Analytical Exposition Text");
+        setSelectedKelas(selectedFase === Fase.FASE_E ? "X" : "XI");
+      } else if (mapelName === "Ekonomi") {
+        setTopik(selectedFase === Fase.FASE_E ? "Kelangkaan & Biaya Peluang" : "Pendapatan Nasional & APBN");
+        setSelectedKelas(selectedFase === Fase.FASE_E ? "X" : "XI");
+      } else if (mapelName === "Geografi") {
+        setTopik(selectedFase === Fase.FASE_E ? "Dasar Pemetaan & SIG" : "Pengelolaan Sumber Daya Alam");
+        setSelectedKelas(selectedFase === Fase.FASE_E ? "X" : "XI");
+      } else if (mapelName === "Sosiologi") {
+        setTopik(selectedFase === Fase.FASE_E ? "Interaksi & Sosialisasi Sosial" : "Konflik & Integrasi Sosial");
+        setSelectedKelas(selectedFase === Fase.FASE_E ? "X" : "XI");
+      } else if (mapelName === "Pendidikan Pancasila") {
+        setTopik(selectedFase === Fase.FASE_E ? "Perumusan & Nilai Pancasila" : "Konstitusi & Pelanggaran HAM");
+        setSelectedKelas(selectedFase === Fase.FASE_E ? "X" : "XI");
+      } else if (mapelName === "Informatika") {
+        setTopik(selectedFase === Fase.FASE_E ? "Berpikir Komputasional Dasar" : "Analisis Big Data & AI Dasar");
+        setSelectedKelas(selectedFase === Fase.FASE_E ? "X" : "XI");
+      } else if (mapelName === "Seni Budaya") {
+        setTopik(selectedFase === Fase.FASE_E ? "Apresiasi Karya Seni Nusantara" : "Manajemen Pameran & Kritik Seni");
+        setSelectedKelas(selectedFase === Fase.FASE_E ? "X" : "XI");
+      } else if (mapelName === "Pendidikan Agama Islam") {
+        setTopik(selectedFase === Fase.FASE_E ? "Makna Asmaul Husna & Mujahadah" : "Hukum Mawaris & Fiqih Muamalah");
+        setSelectedKelas(selectedFase === Fase.FASE_E ? "X" : "XI");
+      } else if (mapelName === "PJOK") {
+        setTopik(selectedFase === Fase.FASE_E ? "Keterampilan Permainan Bola Besar" : "Program Kebugaran & P3K Olahraga");
+        setSelectedKelas(selectedFase === Fase.FASE_E ? "X" : "XI");
       }
     }
   }, [selectedMapel, selectedFase, customMapel]);
@@ -712,6 +742,16 @@ export default function App() {
                       <option value="Kimia">Kimia</option>
                       <option value="Matematika">Matematika</option>
                       <option value="Sejarah">Sejarah</option>
+                      <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                      <option value="Bahasa Inggris">Bahasa Inggris</option>
+                      <option value="Ekonomi">Ekonomi</option>
+                      <option value="Geografi">Geografi</option>
+                      <option value="Sosiologi">Sosiologi</option>
+                      <option value="Pendidikan Pancasila">Pendidikan Pancasila</option>
+                      <option value="Informatika">Informatika</option>
+                      <option value="Seni Budaya">Seni Budaya</option>
+                      <option value="Pendidikan Agama Islam">Pendidikan Agama Islam</option>
+                      <option value="PJOK">PJOK</option>
                       <option value="Custom">Mata Pelajaran Lain...</option>
                     </select>
                   </div>

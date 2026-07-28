@@ -39,6 +39,16 @@ const defaultDPLMapping: Record<string, string[]> = {
   "kimia": ["Penalaran Kritis", "Kreativitas", "Kolaborasi", "Kesehatan"],
   "matematika": ["Penalaran Kritis", "Kemandirian", "Kreativitas"],
   "sejarah": ["Penalaran Kritis", "Kewargaan", "Komunikasi", "Keimanan"],
+  "bahasa indonesia": ["Penalaran Kritis", "Komunikasi", "Kreativitas", "Kemandirian"],
+  "bahasa inggris": ["Kewargaan", "Komunikasi", "Penalaran Kritis", "Kemandirian"],
+  "ekonomi": ["Penalaran Kritis", "Kemandirian", "Gotong Royong", "Kewargaan"],
+  "geografi": ["Keimanan", "Kewargaan", "Penalaran Kritis", "Gotong Royong"],
+  "sosiologi": ["Gotong Royong", "Kewargaan", "Penalaran Kritis", "Komunikasi"],
+  "pendidikan pancasila": ["Keimanan", "Kewargaan", "Gotong Royong", "Penalaran Kritis"],
+  "informatika": ["Penalaran Kritis", "Kreativitas", "Kemandirian", "Gotong Royong"],
+  "seni budaya": ["Kreativitas", "Kewargaan", "Gotong Royong", "Kemandirian"],
+  "pendidikan agama islam": ["Keimanan", "Gotong Royong", "Kemandirian", "Penalaran Kritis"],
+  "pjok": ["Kesehatan", "Gotong Royong", "Kemandirian", "Komunikasi"],
 };
 
 const apiRouter = express.Router();
