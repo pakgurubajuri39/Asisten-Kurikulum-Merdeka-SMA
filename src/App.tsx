@@ -239,7 +239,8 @@ export default function App() {
       });
 
       if (!response.ok) {
-        throw new Error("Gagal mengambil data CP dari server.");
+        const errText = await response.text().catch(() => "");
+        throw new Error(`Gagal mengambil data CP dari server (Status: ${response.status} ${response.statusText}). ${errText ? 'Detail: ' + (errText.length > 100 ? errText.substring(0, 100) + '...' : errText) : ''}`);
       }
 
       const resJson = await response.json();
@@ -297,7 +298,8 @@ export default function App() {
       });
 
       if (!response.ok) {
-        throw new Error("Gagal merumuskan desain pembelajaran modul ajar.");
+        const errText = await response.text().catch(() => "");
+        throw new Error(`Gagal merumuskan desain pembelajaran modul ajar (Status: ${response.status} ${response.statusText}). ${errText ? 'Detail: ' + (errText.length > 100 ? errText.substring(0, 100) + '...' : errText) : ''}`);
       }
 
       const resJson = await response.json();

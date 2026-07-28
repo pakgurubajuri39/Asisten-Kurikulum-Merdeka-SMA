@@ -108,7 +108,8 @@ Pastikan teks bernuansa resmi, baku, dan sesuai peraturan BSKAP 046/H/KR/2025. K
       },
     });
 
-    const text = response.text || "{}";
+    let text = response.text || "{}";
+    text = text.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/\s*```$/, "").trim();
     const parsed = JSON.parse(text);
 
     return res.json({
@@ -308,7 +309,8 @@ Pastikan semua nilai teks bernuansa sangat lengkap, analitis, profesional, mengi
       },
     });
 
-    const text = response.text || "{}";
+    let text = response.text || "{}";
+    text = text.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/\s*```$/, "").trim();
     const parsed = JSON.parse(text);
 
     return res.json({
@@ -325,8 +327,17 @@ Pastikan semua nilai teks bernuansa sangat lengkap, analitis, profesional, mengi
   }
 });
 
+apiRouter.get("/health", (req, res) => res.json({ status: "ok", message: "Pak GuruAI Backend is running" }));
 app.use("/api", apiRouter);
 app.use(apiRouter); // Fallback if Vercel strips the "/api" prefix
+
+// Explicit direct bindings on app for Vercel Serverless routing variations
+app.post("/api/cp/fetch", (req, res, next) => apiRouter(req, res, next));
+app.post("/cp/fetch", (req, res, next) => apiRouter(req, res, next));
+app.post("/api/lesson-plan/generate", (req, res, next) => apiRouter(req, res, next));
+app.post("/lesson-plan/generate", (req, res, next) => apiRouter(req, res, next));
+app.get("/api/health", (req, res) => res.json({ status: "ok", message: "Pak GuruAI Backend is running" }));
+app.get("/api", (req, res) => res.json({ status: "ok", message: "Pak GuruAI Backend is running" }));
 
 // Serve frontend assets in development and production
 async function startServer() {
