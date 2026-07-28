@@ -11,6 +11,23 @@ const app = express();
 app.use(express.json());
 const PORT = 3000;
 
+// Universal fallback routing middleware for Express / Vercel Serverless / Cloud Run variations
+app.use(async (req, res, next) => {
+  if (req.method === "POST") {
+    if (req.path.includes("cp/fetch") || req.url.includes("cp/fetch")) {
+      return handleFetchCP(req, res);
+    }
+    if (req.path.includes("lesson-plan/generate") || req.url.includes("lesson-plan/generate")) {
+      return handleGenerateLessonPlan(req, res);
+    }
+  } else if (req.method === "GET") {
+    if (req.path.includes("health") || req.url.includes("health") || req.path === "/api" || req.path === "/api/") {
+      return res.json({ status: "ok", message: "Pak GuruAI Backend is running" });
+    }
+  }
+  next();
+});
+
 // Initialize Gemini client on the server
 let aiClient: GoogleGenAI | null = null;
 function getGeminiClient(): GoogleGenAI {
@@ -54,7 +71,7 @@ const defaultDPLMapping: Record<string, string[]> = {
 const apiRouter = express.Router();
 
 // Fetch CP (Phase 1)
-apiRouter.post("/cp/fetch", async (req, res) => {
+async function handleFetchCP(req: express.Request, res: express.Response) {
   try {
     const { mapel, fase } = req.body;
     if (!mapel || !fase) {
@@ -133,10 +150,10 @@ Pastikan teks bernuansa resmi, baku, dan sesuai peraturan BSKAP 046/H/KR/2025. K
       details: error.message,
     });
   }
-});
+}
 
 // Generate Lesson Design (Phase 2)
-apiRouter.post("/lesson-plan/generate", async (req, res) => {
+async function handleGenerateLessonPlan(req: express.Request, res: express.Response) {
   try {
     const params = req.body;
     if (!params.mapel || !params.kelas || !params.topik) {
@@ -335,17 +352,22 @@ Pastikan semua nilai teks bernuansa sangat lengkap, analitis, profesional, mengi
       details: error.message,
     });
   }
-});
+}
 
+apiRouter.post("/cp/fetch", handleFetchCP);
+apiRouter.post("/api/cp/fetch", handleFetchCP);
+apiRouter.post("/lesson-plan/generate", handleGenerateLessonPlan);
+apiRouter.post("/api/lesson-plan/generate", handleGenerateLessonPlan);
 apiRouter.get("/health", (req, res) => res.json({ status: "ok", message: "Pak GuruAI Backend is running" }));
+
 app.use("/api", apiRouter);
 app.use(apiRouter); // Fallback if Vercel strips the "/api" prefix
 
-// Explicit direct bindings on app for Vercel Serverless routing variations
-app.post("/api/cp/fetch", (req, res, next) => apiRouter(req, res, next));
-app.post("/cp/fetch", (req, res, next) => apiRouter(req, res, next));
-app.post("/api/lesson-plan/generate", (req, res, next) => apiRouter(req, res, next));
-app.post("/lesson-plan/generate", (req, res, next) => apiRouter(req, res, next));
+// Explicit direct bindings on app for Vercel Serverless and container routing variations
+app.post("/api/cp/fetch", handleFetchCP);
+app.post("/cp/fetch", handleFetchCP);
+app.post("/api/lesson-plan/generate", handleGenerateLessonPlan);
+app.post("/lesson-plan/generate", handleGenerateLessonPlan);
 app.get("/api/health", (req, res) => res.json({ status: "ok", message: "Pak GuruAI Backend is running" }));
 app.get("/api", (req, res) => res.json({ status: "ok", message: "Pak GuruAI Backend is running" }));
 
